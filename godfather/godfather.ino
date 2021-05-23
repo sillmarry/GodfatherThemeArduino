@@ -1,162 +1,153 @@
-const int soundPin = 13;
-const int ledPinD5 = 12;
-const int ledPinF5 = 11;
-const int ledPinE5 = 10;
-const int ledPinAS4 = 9;
-const int ledPinC5 = 8;
+
+const byte soundPin = 13;
+const byte ledPin1 = 12;
+const byte ledPin2 = 11;
+const byte ledPin3 = 10;
+const byte ledPin4 = 9;
+const byte ledPin5 = 8;
+const byte COUNT_NOTES = 44;
+int frequences[COUNT_NOTES] {
+  880, 1175, 1397, 1320, 1175, 1397,
+  1175, 1320, 1175, 932, 1047, 880,
+  880, 1175, 1397, 1320, 1175, 1397,
+  1175, 1320, 1175, 880, 838, 791,
+  747, 838, 997, 1175, 1320, 791, 932,
+  1119, 1175, 880, 932, 880, 932, 
+  1047, 880, 932, 880, 705, 559, 593
+};
+int durations[COUNT_NOTES] {
+  500, 500, 500, 500, 500, 500, 
+  500, 500, 500, 500, 500, 1500, 
+  500, 500, 500, 500, 500, 500, 
+  500, 500, 500, 250, 250, 1500, 
+  500, 500, 500, 1500, 1000, 500, 500,
+  500, 1500, 500, 500, 500, 500,
+  1000, 250, 250, 250, 1000, 500, 2000
+};
  
 void setup() {
 
   pinMode(soundPin, OUTPUT);
-  pinMode(ledPinD5, OUTPUT);
-  pinMode(ledPinF5, OUTPUT);
-  pinMode(ledPinE5, OUTPUT);
-  pinMode(ledPinAS4, OUTPUT);
-  pinMode(ledPinC5, OUTPUT);
+  pinMode(ledPin1, OUTPUT);
+  pinMode(ledPin2, OUTPUT);
+  pinMode(ledPin3, OUTPUT);
+  pinMode(ledPin4, OUTPUT);
+  pinMode(ledPin5, OUTPUT);
  
 }
 
 void loop() {
  
-  fstPart();
+  for(int i = 0; i <= COUNT_NOTES; i++) {
+    tone(soundPin, frequences[i]);
+    ledSoundCtrl(frequences[i]);
+    delay(durations[i]);
+  }
 
 }
 
-void fstPart() {
+void ledSoundCtrl(int note) {
 
-  analogWrite(soundPin, 1720);
-  ledSoundCtrl(1, 1, 1, 1, 1);
-  delay(500);
-  
-  analogWrite(soundPin, 0);
-  ledSoundCtrl(0, 0, 0, 0, 0);
-  delay(50);
-  
-  analogWrite(soundPin, 2349);
-  ledSoundCtrl(1, 0, 0, 0, 0);
-  delay(500);
-  
-  analogWrite(soundPin, 0);
-  ledSoundCtrl(0, 0, 0, 0, 0);
-  delay(50);
-  
-  analogWrite(soundPin, 2794);
-  ledSoundCtrl(0, 1, 0, 0, 0);
-  delay(500);
-  
-  analogWrite(soundPin, 0);
-  ledSoundCtrl(0, 0, 0, 0, 0);
-  delay(50);
-  
-  analogWrite(soundPin, 2637);
-  ledSoundCtrl(0, 0, 1, 0, 0);
-  delay(500);
-  
-  analogWrite(soundPin, 0);
-  ledSoundCtrl(0, 0, 0, 0, 0);
-  delay(50);
-  
-  analogWrite(soundPin, 2349);
-  ledSoundCtrl(1, 0, 0, 0, 0);
-  delay(500);
-  
-  analogWrite(soundPin, 0);
-  ledSoundCtrl(0, 0, 0, 0, 0);
-  delay(50);
-  
-  analogWrite(soundPin, 2794);
-  ledSoundCtrl(0, 1, 0, 0, 0);
-  delay(500);
-  
-  analogWrite(soundPin, 0);
-  ledSoundCtrl(0, 0, 0, 0, 0);
-  delay(50);
-  
-  analogWrite(soundPin, 2349);
-  ledSoundCtrl(1, 0, 0, 0, 0);
-  delay(500);
-  
-  analogWrite(soundPin, 0);
-  ledSoundCtrl(0, 0, 0, 0, 0);
-  delay(50);
-  
-  analogWrite(soundPin, 2637);
-  ledSoundCtrl(0, 0, 1, 0, 0);
-  delay(500);
-  
-  analogWrite(soundPin, 0);
-  ledSoundCtrl(0, 0, 0, 0, 0);
-  delay(50);
-  
-  analogWrite(soundPin, 2349);
-  ledSoundCtrl(1, 0, 0, 0, 0);
-  delay(500);
-  
-  analogWrite(soundPin, 0);
-  ledSoundCtrl(0, 0, 0, 0, 0);
-  delay(50);
-  
-  analogWrite(soundPin, 1864);
-  ledSoundCtrl(0, 0, 0, 1, 0);
-  delay(500);
-  
-  analogWrite(soundPin, 0);
-  ledSoundCtrl(0, 0, 0, 0, 0);
-  delay(50);
-  
-  analogWrite(soundPin, 2093);
-  ledSoundCtrl(0, 0, 0, 0, 1);
-  delay(500);
-  
-  analogWrite(soundPin, 0);
-  ledSoundCtrl(0, 0, 0, 0, 0);
-  delay(50);
-  
-  analogWrite(soundPin, 1720);
-  ledSoundCtrl(1, 1, 1, 1, 1);
-  delay(1000);
-  
-  analogWrite(soundPin, 0);
-  ledSoundCtrl(0, 0, 0, 0, 0);
-  delay(2000);
-
-}
-
-void ledSoundCtrl(int d5, int f5, int e5, int as4, int c5) {
-
-  if(d5 == 1) {
-    digitalWrite(ledPinD5, HIGH);
-  }
-  else {
-    digitalWrite(ledPinD5, LOW);
-  }
-
-  if(f5 == 1) {
-    digitalWrite(ledPinF5, HIGH);
-  }
-  else {
-    digitalWrite(ledPinF5, LOW);
-  }
-
-  if(e5 == 1) {
-    digitalWrite(ledPinE5, HIGH);
-  }
-  else {
-    digitalWrite(ledPinE5, LOW);
-  }
-
-  if(as4 == 1) {
-    digitalWrite(ledPinAS4, HIGH);
-  }
-  else {
-    digitalWrite(ledPinAS4, LOW);
-  }
-
-  if(c5 == 1) {
-    digitalWrite(ledPinC5, HIGH);
-  }
-  else {
-    digitalWrite(ledPinC5, LOW);
+  switch(note) {
+    case 559:
+      digitalWrite(ledPin1, HIGH);
+      digitalWrite(ledPin2, LOW);
+      digitalWrite(ledPin3, LOW);
+      digitalWrite(ledPin4, LOW);
+      digitalWrite(ledPin5, LOW);
+      break;
+    case 593:
+      digitalWrite(ledPin1, LOW);
+      digitalWrite(ledPin2, HIGH);
+      digitalWrite(ledPin3, LOW);
+      digitalWrite(ledPin4, LOW);
+      digitalWrite(ledPin5, LOW);
+      break;
+    case 705:
+      digitalWrite(ledPin1, HIGH);
+      digitalWrite(ledPin2, HIGH);
+      digitalWrite(ledPin3, LOW);
+      digitalWrite(ledPin4, LOW);
+      digitalWrite(ledPin5, LOW);
+      break;
+    case 747:
+      digitalWrite(ledPin1, LOW);
+      digitalWrite(ledPin2, LOW);
+      digitalWrite(ledPin3, HIGH);
+      digitalWrite(ledPin4, LOW);
+      digitalWrite(ledPin5, LOW);
+      break;
+    case 791:
+      digitalWrite(ledPin1, HIGH);
+      digitalWrite(ledPin2, LOW);
+      digitalWrite(ledPin3, HIGH);
+      digitalWrite(ledPin4, LOW);
+      digitalWrite(ledPin5, LOW);
+      break;
+    case 838:
+      digitalWrite(ledPin1, LOW);
+      digitalWrite(ledPin2, HIGH);
+      digitalWrite(ledPin3, HIGH);
+      digitalWrite(ledPin4, LOW);
+      digitalWrite(ledPin5, LOW);
+      break;
+    case 880:
+      digitalWrite(ledPin1, HIGH);
+      digitalWrite(ledPin2, HIGH);
+      digitalWrite(ledPin3, HIGH);
+      digitalWrite(ledPin4, LOW);
+      digitalWrite(ledPin5, LOW);
+      break; 
+    case 932:
+      digitalWrite(ledPin1, LOW);
+      digitalWrite(ledPin2, LOW);
+      digitalWrite(ledPin3, LOW);
+      digitalWrite(ledPin4, HIGH);
+      digitalWrite(ledPin5, LOW);
+      break;
+    case 997:
+      digitalWrite(ledPin1, HIGH);
+      digitalWrite(ledPin2, LOW);
+      digitalWrite(ledPin3, LOW);
+      digitalWrite(ledPin4, HIGH);
+      digitalWrite(ledPin5, LOW);
+      break;
+    case 1047:
+      digitalWrite(ledPin1, LOW);
+      digitalWrite(ledPin2, HIGH);
+      digitalWrite(ledPin3, LOW);
+      digitalWrite(ledPin4, HIGH);
+      digitalWrite(ledPin5, LOW);
+      break;
+    case 1119:
+      digitalWrite(ledPin1, HIGH);
+      digitalWrite(ledPin2, HIGH);
+      digitalWrite(ledPin3, LOW);
+      digitalWrite(ledPin4, HIGH);
+      digitalWrite(ledPin5, LOW);
+      break;
+    case 1175:
+      digitalWrite(ledPin1, LOW);
+      digitalWrite(ledPin2, LOW);
+      digitalWrite(ledPin3, HIGH);
+      digitalWrite(ledPin4, HIGH);
+      digitalWrite(ledPin5, LOW);
+      break;
+    case 1320:
+      digitalWrite(ledPin1, HIGH);
+      digitalWrite(ledPin2, LOW);
+      digitalWrite(ledPin3, HIGH);
+      digitalWrite(ledPin4, HIGH);
+      digitalWrite(ledPin5, LOW);
+      break;
+    case 1397:
+      digitalWrite(ledPin1, HIGH);
+      digitalWrite(ledPin2, HIGH);
+      digitalWrite(ledPin3, HIGH);
+      digitalWrite(ledPin4, HIGH);
+      digitalWrite(ledPin5, HIGH);
+      break;
+   
   }
   
 }
